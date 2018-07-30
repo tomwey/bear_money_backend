@@ -1,4 +1,6 @@
 class TaskType < ActiveRecord::Base
+  validates :icon, :name, presence: true
+  mount_uploader :icon, AvatarUploader
   
   before_create :generate_uniq_id
   def generate_uniq_id
