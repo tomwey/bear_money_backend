@@ -17,7 +17,7 @@ index do
   column('#',:id)
   column :uniq_id
   column :icon do |model,opts|
-    image_tag model.icon.url(:small)
+    image_tag model.icon.url(:large)
   end
   column :name
   column :opened
