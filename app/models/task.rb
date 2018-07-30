@@ -1,5 +1,9 @@
 class Task < ActiveRecord::Base
   validates :title, :body, :money, :_money, :task_type_id, :total_count, :expired_at, presence: true
+  
+  has_many :task_steps, dependent: :destroy
+  accepts_nested_attributes_for :task_steps, allow_destroy: true, reject_if: proc { |o| o[:_type].blank? or o[:content].blank? }
+  
   before_create :generate_uniq_id
   def generate_uniq_id
     begin

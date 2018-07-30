@@ -3,7 +3,7 @@ ActiveAdmin.register Task do
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
 permit_params :title, :body, :money, :task_type_id, :total_count, :expired_at, :sort, :opened,  
-              :repeat_count, :approve_duration,:avg_approve
+              :repeat_count, :approve_duration,:avg_approve, task_steps_attributes: [:id, :_type, :content, :memo, :_destroy]
 #
 # or
 #
@@ -28,6 +28,15 @@ form do |f|
     f.input :sort, placeholder: '值越大显示越靠前'
     f.input :opened
   end
+  
+  f.inputs '任务步骤' do
+    f.has_many :task_steps, heading: nil, allow_destroy: true do |a|
+      a.input :_type, as: :select, label: '步骤类型', collection: TaskStep::TYPEs, prompt: '-- 选择步骤类型 --', required: true
+      a.input :content,as: :text, label: '步骤说明', input_html: { class: 'redactor' }, placeholder: '网页内容，支持图文混排', hint: '网页内容，支持图文混排'
+      a.input :memo,as: :text, label: '步骤示例', input_html: { class: 'redactor' }, placeholder: '网页内容，支持图文混排', hint: '网页内容，支持图文混排'
+    end
+  end
+  
   actions
 end
 

@@ -44,6 +44,7 @@
       pay_log: '交易明细'
       task_type: '任务分类'
       task: '任务'
+      task_step: '任务步骤'
     attributes:
       user:
         uid: 'ID'
