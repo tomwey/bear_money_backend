@@ -1,8 +1,9 @@
-ActiveAdmin.register TaskType do
+ActiveAdmin.register Task do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :icon, :name, :sort, :opened
+permit_params :title, :body, :money, :task_type_id, :total_count, :expired_at, :sort, :opened,  
+              :repeat_count, :approve_duration,:avg_approve
 #
 # or
 #
@@ -11,19 +12,5 @@ permit_params :icon, :name, :sort, :opened
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-
-index do
-  selectable_column
-  column('#',:id)
-  column :uniq_id
-  column :icon do |model,opts|
-    image_tag model.icon.url(:small)
-  end
-  column :name
-  column :opened
-  column :sort
-  
-  actions
-end
 
 end
